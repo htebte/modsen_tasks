@@ -2,9 +2,6 @@
 {
     public decimal CalculateDeliveryCost(double distance, double weight, bool isFragile, string deliveryType)
     {
-        if (distance <= 0) throw new ArgumentException("Дистанция должна быть больше нуля");
-        if (weight <= 0) throw new ArgumentException("Вес должен быть больше нуля");
-
         decimal result = 0;
         decimal basePrice = 10;
         decimal distancePrice = (decimal)(distance * 0.5);
@@ -12,8 +9,8 @@
         decimal fragileModifyer = 1;
         decimal deliveryTypeModifyer = 1;
 
-        if (isFragile) fragileModifyer = 1.5m;
-
+        if (distance <= 0) throw new ArgumentException("Дистанция должна быть больше нуля");
+        if (weight <= 0) throw new ArgumentException("Вес должен быть больше нуля");
         switch (deliveryType)
         {
             case "Standard": deliveryTypeModifyer = 1; break;
@@ -22,6 +19,8 @@
             default:
                 throw new ArgumentException($"Неизвестный тип доставки. Допустимые значения: 'Standard', 'Express', 'Overnight'");
         }
+
+        if (isFragile) fragileModifyer = 1.5m;
 
         result = (basePrice + distancePrice + weightPrice) * fragileModifyer * deliveryTypeModifyer;
 

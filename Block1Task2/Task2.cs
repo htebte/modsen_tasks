@@ -1,17 +1,20 @@
-﻿public class CapcityCalculator
+﻿public class CapacityCalculator
 {
     public int GetRequiredContainers(int[] boxWeights, int maxCapacity)
     {
         int result = 1;
         int currentWeight = 0;
 
-        for (int i = 0; i < boxWeights.Length; i++) {
-            if (boxWeights[i] > maxCapacity) 
+        if (boxWeights == null || boxWeights.Length == 0)
+            return 0;
+
+        foreach (int weight in boxWeights)
+        {
+            if (weight > maxCapacity)
                 throw new ArgumentException("Вес коробки превышает максимальную ёмкость контейнера");
+        }
 
-            if (boxWeights == null || boxWeights.Length == 0)
-                return 0;
-
+        for (int i = 0; i < boxWeights.Length; i++) {
             if (currentWeight + boxWeights[i] <= maxCapacity)
             {
                 currentWeight += boxWeights[i];
@@ -31,7 +34,7 @@ class Task2
 {
     static void Main()
     {
-        var calculator = new CapcityCalculator();
+        var calculator = new CapacityCalculator();
 
         try
         {
