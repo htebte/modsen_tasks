@@ -1,0 +1,14 @@
+C:\Users\admin\source\repos\Block1Task1\bin\Debug\net8.0\Block1Task1.exe
+C:\Users\admin\source\repos\Block1Task1\bin\Debug\net8.0\Block1Task1.deps.json
+C:\Users\admin\source\repos\Block1Task1\bin\Debug\net8.0\Block1Task1.runtimeconfig.json
+C:\Users\admin\source\repos\Block1Task1\bin\Debug\net8.0\Block1Task1.dll
+C:\Users\admin\source\repos\Block1Task1\bin\Debug\net8.0\Block1Task1.pdb
+C:\Users\admin\source\repos\Block1Task1\obj\Debug\net8.0\Block1Task1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\source\repos\Block1Task1\obj\Debug\net8.0\Block1Task1.AssemblyInfoInputs.cache
+C:\Users\admin\source\repos\Block1Task1\obj\Debug\net8.0\Block1Task1.AssemblyInfo.cs
+C:\Users\admin\source\repos\Block1Task1\obj\Debug\net8.0\Block1Task1.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\Block1Task1\obj\Debug\net8.0\Block1Task1.dll
+C:\Users\admin\source\repos\Block1Task1\obj\Debug\net8.0\refint\Block1Task1.dll
+C:\Users\admin\source\repos\Block1Task1\obj\Debug\net8.0\Block1Task1.pdb
+C:\Users\admin\source\repos\Block1Task1\obj\Debug\net8.0\Block1Task1.genruntimeconfig.cache
+C:\Users\admin\source\repos\Block1Task1\obj\Debug\net8.0\ref\Block1Task1.dll
