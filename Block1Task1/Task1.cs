@@ -1,33 +1,91 @@
-﻿public class DeliveryCalculator 
+﻿public class DeliveryCalculator
 {
+    private const decimal BASE_PRICE = 10;
+    private const decimal DISTANCE_PRICE = 0.5m;
+    private const decimal WEIGHT_PRICE = 2m;
+    private const decimal FRAGILE_MODIFIER = 1.5m;
+
     public decimal CalculateDeliveryCost(double distance, double weight, bool isFragile, string deliveryType)
     {
-        decimal result = 0;
-        decimal basePrice = 10;
-        decimal distancePrice = (decimal)(distance * 0.5);
-        decimal weightPrice = (decimal)(weight * 2);
-        decimal fragileModifyer = 1;
-        decimal deliveryTypeModifyer = 1;
+        ValidateInput(distance, weight, deliveryType);
+        
+        decimal baseCost = CalculateBaseCost(distance, weight);
+        decimal modifier = CalculateModifier(isFragile, deliveryType);
+        decimal result = baseCost * modifier;
+        
+        return ApplyProgressiveDiscount(result);
+    }
 
-        if (distance <= 0) throw new ArgumentException("Дистанция должна быть больше нуля");
-        if (weight <= 0) throw new ArgumentException("Вес должен быть больше нуля");
-        switch (deliveryType)
+    private void ValidateInput(double distance, double weight, string deliveryType)
+    {
+        if (distance <= 0)
         {
-            case "Standard": deliveryTypeModifyer = 1; break;
-            case "Express": deliveryTypeModifyer = 1.5m; break;
-            case "Overnight": deliveryTypeModifyer = 2; break;
-            default:
-                throw new ArgumentException($"Неизвестный тип доставки. Допустимые значения: 'Standard', 'Express', 'Overnight'");
+            throw new ArgumentException("Дистанция должна быть больше нуля");
+        }
+                    
+        if (weight <= 0)
+        {
+            throw new ArgumentException("Вес должен быть больше нуля");
         }
 
-        if (isFragile) fragileModifyer = 1.5m;
+        if (deliveryType != "Standard" && deliveryType != "Express" && deliveryType != "Overnight")
+        {
+            throw new ArgumentException($"Неизвестный тип доставки. Допустимые значения: 'Standard', 'Express', 'Overnight'");
+        }
+    }
 
-        result = (basePrice + distancePrice + weightPrice) * fragileModifyer * deliveryTypeModifyer;
+    private decimal CalculateBaseCost(double distance, double weight)
+    {
+        decimal distancePrice = (decimal)(distance * (double)DISTANCE_PRICE);
+        decimal weightPrice = (decimal)(weight * (double)WEIGHT_PRICE);
+        
+        return BASE_PRICE + distancePrice + weightPrice;
+    }
 
-        if (result <= 500) return result;
-        if (result <= 1000) return 500 + (result - 500) * 0.9m;
-        if (result <= 2000) return 500 + 500 * 0.9m + (result - 1000) * 0.8m;
-        return 500 + 500 * 0.9m + 1000 * 0.8m + (result - 2000) * 0.7m;
+    private decimal CalculateModifier(bool isFragile, string deliveryType)
+    {
+        decimal deliveryTypeModifier = 1;
+
+        switch (deliveryType)
+        {
+            case "Standard":
+                deliveryTypeModifier = 1;
+                break;
+
+            case "Express":
+                deliveryTypeModifier = 1.5m;
+                break;
+
+            case "Overnight":
+                deliveryTypeModifier = 2;
+                break;
+
+            default:
+                deliveryTypeModifier = 1;
+                break;
+        }
+
+        decimal fragileModifier = 1;
+        if (isFragile)
+        {
+            fragileModifier = 1.5m;
+        }
+
+        return deliveryTypeModifier * fragileModifier;
+    }
+
+    private decimal ApplyProgressiveDiscount(decimal cost)
+    {
+        if (cost <= 500) 
+            return cost;
+        
+        if (cost <= 1000) 
+            return 500 + (cost - 500) * 0.9m;
+        
+        if (cost <= 2000) 
+            return 500 + 500 * 0.9m + (cost - 1000) * 0.8m;
+        
+        return 500 + 500 * 0.9m + 1000 * 0.8m + (cost - 2000) * 0.7m;
     }
 }
 
