@@ -6,12 +6,16 @@
         int currentWeight = 0;
 
         if (boxWeights == null || boxWeights.Length == 0)
+        {
             return 0;
+        }
 
         foreach (int weight in boxWeights)
         {
             if (weight > maxCapacity)
+            {
                 throw new ArgumentException("Вес коробки превышает максимальную ёмкость контейнера");
+            }
         }
 
         for (int i = 0; i < boxWeights.Length; i++) {
